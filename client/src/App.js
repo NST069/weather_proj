@@ -1,30 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 import axios from 'axios';
 
+import Content from './Components/Content';
+
 function App() {
   const endpoint = "http://localhost:5000";
 
-  axios.get(`${endpoint}/getWeather`,{params:{city: "London", state: "uk"}})
-    .then((res)=>console.log(res.data));
+  const [city, setCity] = useState("");
+  const [weatherInfo, setWeatherInfo] = useState(null);
+
+  useEffect(()=>{
+    console.log(weatherInfo);
+  }, [weatherInfo]);
+
+  const getWeather = async(event)=>{
+    event.preventDefault();
+    let data;
+    axios.get(`${endpoint}/getWeather`,{params:{city:"London"}})
+      .then((res)=>{
+        data = res.data;
+        setWeatherInfo(data);
+      });
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Content
+        getWeather={getWeather}
+        setWeatherInfo={setWeatherInfo}
+        weatherInfo = {weatherInfo}
+      />
     </div>
   );
 }
