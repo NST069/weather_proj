@@ -5,6 +5,7 @@ import './App.css';
 import axios from 'axios';
 
 import Content from './Components/Content';
+import SearchString from './Components/SearchString';
 
 function App() {
   const endpoint = "http://localhost:5000";
@@ -19,7 +20,7 @@ function App() {
   const getWeather = async(event)=>{
     event.preventDefault();
     let data;
-    axios.get(`${endpoint}/getWeather`,{params:{city:"London"}})
+    axios.get(`${endpoint}/getWeather`,{params:{city:city}})
       .then((res)=>{
         data = res.data;
         setWeatherInfo(data);
@@ -27,9 +28,11 @@ function App() {
   }
   return (
     <div className="App">
-      <Content
+      <SearchString
+        setCity={setCity}
         getWeather={getWeather}
-        setWeatherInfo={setWeatherInfo}
+      />
+      <Content
         weatherInfo = {weatherInfo}
       />
     </div>

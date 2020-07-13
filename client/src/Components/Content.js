@@ -1,14 +1,13 @@
 import React from 'react';
 
-function Content({getWeather, setWeatherInfo, weatherInfo}){
-    let weather;
+function Content({weatherInfo}){
     return(
         <div>
-            <button onClick={(event)=>{
-                getWeather(event);
-                }}>Click</button>
-            {weather
-            ? <p>{weatherInfo.location.Name +" "+ weatherInfo.location.country}</p>
+            {weatherInfo
+            ? <div><p>{weatherInfo.location.name +", "+ weatherInfo.location.country}</p>
+              <p>{weatherInfo.location.lat +" "+ weatherInfo.location.lon}</p>
+              <p>{weatherInfo.current.temperature +" C"}</p>
+              <img src={weatherInfo.current.weather_icons} alt={weatherInfo.current.weather_code}/></div>
             : null}
         </div>
     );
