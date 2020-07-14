@@ -2,7 +2,7 @@
 
 ## Todo
 - [x] Getting Weather Info from API
-- [ ] Display Info in Card Layout
+- [x] Display Info in Card Layout
 - [ ] Search string autocompletion 
 - [ ] Geolocation
 - [ ] Limit API requests
